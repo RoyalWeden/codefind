@@ -33,7 +33,7 @@
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link active" href="/login">Login</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -44,10 +44,18 @@
         <div class="container-sm bg-white rounded" style="max-width: 80%; max-width: 325px; max-height: 375px;">
             <div class="row justify-content-md-center text-md-center g-3">
                 <div class="col-auto">
+                    {% if session['identifier_type'] == 'email' %}
+                    <a role="button" href="/login/email" class="btn disabled btn-light border-0" style="background-color: #ffd500;">EMAIL</a>
+                    {% else %}
                     <a role="button" href="/login/email" class="btn btn-light border-0" style="background-color: #ffd500;">EMAIL</a>
+                    {% endif %}
                 </div>
                 <div class="col-auto">
+                    {% if session['identifier_type'] == 'phone_number_sms' %}
+                    <a role="button" href="/login/phone_number_sms" class="btn disabled btn-light border-0" style="background-color: #ffd500;">PHONE #</a>
+                    {% else %}
                     <a role="button" href="/login/phone_number_sms" class="btn btn-light border-0" style="background-color: #ffd500;">PHONE #</a>
+                    {% endif %}
                 </div>
                 <div class="col-auto">
                     {% include "./partials/_sawo.html" %}

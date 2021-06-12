@@ -3,12 +3,15 @@ from app import app, config
 from flask import redirect, render_template, session, url_for, request
 from sawo import createTemplate, verifyToken
 import json
+from app.database import PostgreSQLConnection
 
 createTemplate("app/templates/partials", flask=True)
+sqldb = PostgreSQLConnection()
 
 @app.route('/')
 @app.route('/home')
 def home():
+    sqldb.drop_tables() # MAKE SURE TO REMOVE THIS
     if 'identifier_type' not in session:
         session['identifier_type'] = 'email'
     return render_template(
@@ -55,7 +58,7 @@ def sawo():
             # set user session
             session['user_id'] = payload['user_id']
             session['identifier'] = payload['identifier']
-            print('verified', payload)
+            sqldb.create_user(session['user_id'], session['identifier_type'], session['identifier'])
             return redirect('/')
         else:
             # no good
