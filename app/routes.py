@@ -4,7 +4,6 @@ from flask import redirect, render_template, session, url_for, request
 from sawo import createTemplate, verifyToken
 import json
 
-app.secret_key = config['SECRET_KEY']
 createTemplate("app/templates/partials", flask=True)
 
 @app.route('/')
