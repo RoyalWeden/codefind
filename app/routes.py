@@ -9,6 +9,8 @@ createTemplate("app/templates/partials", flask=True)
 @app.route('/')
 @app.route('/home')
 def home():
+    if 'identifier_type' not in session:
+        session['identifier_type'] = 'email'
     return render_template(
         'home.html',
         session=session
@@ -31,10 +33,18 @@ def login():
         session=session
     )
 
+@app.route('/login/<identifier_type>')
+def set_login_type(identifier_type):
+    if 'user_id' in session and session['user_id'] != '':
+        return redirect('/')
+    if identifier_type == 'email' or identifier_type == 'phone_number_sms':
+        session['identifier_type'] = identifier_type
+    return redirect('/login')
+
 @app.route('/logout')
 def logout():
     session['user_id'] = ''
-    session['email'] = ''
+    session['identifier'] = ''
     return redirect('/')
 
 @app.route('/sawo', methods=['GET','POST'])
@@ -44,7 +54,7 @@ def sawo():
         if verifyToken(payload):
             # set user session
             session['user_id'] = payload['user_id']
-            session['email'] = payload['identifier']
+            session['identifier'] = payload['identifier']
             print('verified', payload)
             return redirect('/')
         else:
@@ -55,6 +65,6 @@ def sawo():
 def sawo_route(to_location):
     return {
         'auth_key': config['SAWO_API_KEY'],
-        'identifier': 'email',
+        'identifier': session['identifier_type'],
         'to': to_location
     }

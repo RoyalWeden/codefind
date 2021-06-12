@@ -41,8 +41,18 @@
             </div>
         </nav>
 
-        <div class="d-flex justify-content-center">
-            {% include "./partials/_sawo.html" %}
+        <div class="container-sm bg-white rounded" style="max-width: 80%; max-width: 325px; max-height: 375px;">
+            <div class="row justify-content-md-center text-md-center g-3">
+                <div class="col-auto">
+                    <a role="button" href="/login/email" class="btn btn-light border-0" style="background-color: #ffd500;">EMAIL</a>
+                </div>
+                <div class="col-auto">
+                    <a role="button" href="/login/phone_number_sms" class="btn btn-light border-0" style="background-color: #ffd500;">PHONE #</a>
+                </div>
+                <div class="col-auto">
+                    {% include "./partials/_sawo.html" %}
+                </div>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>    </body>
