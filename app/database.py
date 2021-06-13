@@ -1,18 +1,20 @@
 import psycopg2
 from app import config
+import os
 
 class PostgreSQLConnection():
     def __init__(self):
-        self.conn = psycopg2.connect(
-            host=config['PGHOST'],
-            port=config['PGPORT'],
-            dbname=config['PGDATABASE'],
-            user=config['PGUSER'],
-            password=config['PGPASSWORD'],
-            options=config['PGOPTIONS'],
-            sslmode=config['PGSSLMODE'],
-            sslrootcert=config['PGSSLROOTCERT']
-        )
+        # self.conn = psycopg2.connect(
+        #     host=config['PGHOST'],
+        #     port=config['PGPORT'],
+        #     dbname=config['PGDATABASE'],
+        #     user=config['PGUSER'],
+        #     password=config['PGPASSWORD'],
+        #     options=config['PGOPTIONS'],
+        #     sslmode=config['PGSSLMODE'],
+        #     sslrootcert=config['PGSSLROOTCERT']
+        # )
+        self.conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
 
     def create_tables(self):
         with self.conn.cursor() as cur:
