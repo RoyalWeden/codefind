@@ -13,7 +13,6 @@ class PostgreSQLConnection():
             sslmode=config['PGSSLMODE'],
             sslrootcert=config['PGSSLROOTCERT']
         )
-        self.conn.autocommit = True
 
     def create_tables(self):
         with self.conn.cursor() as cur:

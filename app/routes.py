@@ -7,7 +7,7 @@ import webbrowser
 
 createTemplate("app/templates/partials", flask=True)
 sqldb = PostgreSQLConnection()
-sqldb.drop_tables() # MAKE SURE TO REMOVE THIS
+# sqldb.drop_tables() # MAKE SURE TO REMOVE THIS
 
 from app.customsearch import CustomSearch
 search_api = CustomSearch()
