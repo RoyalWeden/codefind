@@ -15,6 +15,13 @@ class PostgreSQLConnection():
         #     sslrootcert=config['PGSSLROOTCERT']
         # )
         self.conn = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
+        # self.conn = psycopg2.connect(
+        #     dbname=config['DBNAME'],
+        #     user=config['DBUSER'],
+        #     password=config['DBPASSWORD'],
+        #     host=config['DBHOST'],
+        #     port=config['DBPORT']
+        # )
 
     def create_tables(self):
         with self.conn.cursor() as cur:
